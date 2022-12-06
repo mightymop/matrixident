@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Dynamic;
 using MatrixIdent.Models;
 using System.Text;
+using log4net;
 
 namespace MatrixIdent.Controllers
 {
@@ -13,6 +14,7 @@ namespace MatrixIdent.Controllers
     {
         private readonly DBService _dbService;
         private readonly ConfigService _configService;
+        private ILog log = LogManager.GetLogger(typeof(KeyController));
 
         public KeyController(DBService dbService, ConfigService configService)
         {

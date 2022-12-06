@@ -1,8 +1,5 @@
-﻿
-using MatrixIdent.Models;
+﻿using MatrixIdent.Models;
 using Newtonsoft.Json.Linq;
-using System.Diagnostics;
-using System.Text;
 
 namespace MatrixIdent.Services
 {

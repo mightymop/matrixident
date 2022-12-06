@@ -7,11 +7,9 @@ namespace MatrixIdent.Services
     public class DBService
     {
         private IdentDbContext _context;
-        private readonly ConfigService _config;
-
+        
         public DBService(ConfigService config)
-        {
-            _config = config;
+        {        
             _context = new IdentDbContext(config);
         }
 

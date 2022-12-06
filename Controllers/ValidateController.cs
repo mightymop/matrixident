@@ -5,6 +5,7 @@ using MatrixIdent.Models;
 using MatrixIdent.Services;
 using Org.BouncyCastle.Ocsp;
 using System.Security.Cryptography;
+using log4net;
 
 namespace MatrixIdent.Controllers
 {
@@ -14,6 +15,7 @@ namespace MatrixIdent.Controllers
     {
         private readonly DBService _dbService;
         private readonly ConfigService _configService;
+        private ILog log = LogManager.GetLogger(typeof(ValidateController));
 
         public ValidateController(DBService dbService, ConfigService configService)
         {

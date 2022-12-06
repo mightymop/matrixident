@@ -4,6 +4,7 @@ using MatrixIdent.Services;
 using System.Text.Json.Nodes;
 using static Org.BouncyCastle.Math.EC.ECCurve;
 using System.Net;
+using log4net;
 
 namespace MatrixIdent.Controllers
 {
@@ -13,6 +14,7 @@ namespace MatrixIdent.Controllers
     {
         private readonly DBService _dbService;
         private readonly ConfigService _configService;
+        private ILog log = LogManager.GetLogger(typeof(ThreePidController));
 
         public ThreePidController(DBService dbService, ConfigService configService)
         {

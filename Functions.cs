@@ -1,15 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Drawing.Drawing2D;
+﻿using System.Diagnostics;
 using System.Net.Mail;
-using System.Security.Principal;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using Ed25519;
 using MatrixIdent.Models;
 using MatrixIdent.Services;
-using Microsoft.Extensions.Hosting;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
@@ -17,7 +13,6 @@ using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities.IO.Pem;
 using Org.BouncyCastle.X509;
-using Stratumn.CanonicalJson;
 
 namespace MatrixIdent
 {

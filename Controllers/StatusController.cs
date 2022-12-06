@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MatrixIdent.Services;
-using System.Text;
 using System.Net;
-using Org.BouncyCastle.Utilities.Net;
 using System.Text.Json.Nodes;
+using log4net;
 
 namespace MatrixIdent.Controllers
 {
@@ -13,6 +11,7 @@ namespace MatrixIdent.Controllers
     public class StatusController : ControllerBase
     {
         private readonly ConfigService _config;
+        private ILog log = LogManager.GetLogger(typeof(StatusController));
 
         public StatusController(ConfigService config)
         {

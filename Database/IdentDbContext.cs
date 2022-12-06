@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MatrixIdent.Models;
 using MatrixIdent.Services;
+using log4net;
+using MatrixIdent.Controllers;
 
 namespace MatrixIdent.Database
 {
@@ -8,6 +10,7 @@ namespace MatrixIdent.Database
     {
 
         private readonly ConfigService _config;
+        private ILog log = LogManager.GetLogger(typeof(IdentDbContext));
 
         public IdentDbContext(ConfigService config) : base()
         {
