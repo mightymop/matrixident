@@ -134,20 +134,24 @@ namespace MatrixIdent.Controllers
         private async Task<IActionResult> lookupDirectory(SearchRequestItem request)
         {
             string token = Functions.getToken(Request);
+            log.Debug("lookupDirectory(): token=" + token);
             if (token == null)
             {
+                log.Warn("lookupDirectory() M_NOT_AUTHORIZED");
                 return Unauthorized(new ErrorType("M_NOT_AUTHORIZED", "THIS ENDPOINT NEEDS AUTHORIZATION FIRST.").ToJSON());
             }
 
             //Terms checken
             if (!true)
             {
+                log.Warn("lookupDirectory() M_TERMS_NOT_SIGNED");
                 return Forbid(new ErrorType("M_TERMS_NOT_SIGNED", "YOU NEED TO ACCEPT THE TERMS FIRST.").ToString());
             }
 
             if (request.search_term.Length<_configService.getMinSearchLength())
             {
                 //return BadRequest(ErrorType.M_INVALID_PARAM.ToJSON());
+                log.Warn("lookupDirectory(): M_LIMIT_EXCEEDED (to short)");
                 return new ObjectResult(new
                 {
                     errcode= "M_LIMIT_EXCEEDED",
@@ -162,10 +166,12 @@ namespace MatrixIdent.Controllers
             try
             {
                 LdapResult[] resultarray = await _ldapService.lookup2(request.search_term);
+                log.Debug("lookupDirectory(): resultarray="+ resultarray.ToString());
                 IComparer myComparer = new ResultComparator(request.search_term);
                 Array.Sort(resultarray, myComparer);
                 if (resultarray != null && resultarray.Length > 0)
                 {
+                    log.Debug("lookupDirectory(): result found");
                     int max;
                     if (request.limit != null && resultarray.Length > request.limit)
                     {
@@ -183,21 +189,24 @@ namespace MatrixIdent.Controllers
                     }
 
                     var result = new { limited = max < resultarray.Length ? true : false, results = results.ToArray() };
+
+                    log.Debug("lookupDirectory(): result="+result);
                     return Ok(result);
                 }
                 else
                 {
+                    log.Debug("lookupDirectory(): no result");
                     return Ok(new { limited = false, results = new object[] {} });
                 }
             }
             catch (LdapException e)
             {
-                //    log.Error("user data not collected: " + e.Message, e);
+                log.Error("user data not collected: " + e.Message, e);
                 return Problem(new ErrorType("M_LDAP_ERROR", e.Message).ToString());
             }
             catch (Exception e2)
             {
-                //    log.Error("user data not collected: " + e2.Message, e2);
+                log.Error("user data not collected: " + e2.Message, e2);
                 return Problem(new ErrorType("M_UNKNOWN", e2.Message).ToString());
             }
 
@@ -212,7 +221,8 @@ namespace MatrixIdent.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> lookup(SearchRequestItem request)
         {
-             return await lookupDirectory(request);
+            log.Debug("lookup() request="+ request.ToString());
+            return await lookupDirectory(request);
         }
 
         private async Task<IActionResult> processLDAP(LookupRequest request)

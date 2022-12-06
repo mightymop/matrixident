@@ -24,6 +24,7 @@ namespace MatrixIdent.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult v2()
         {
+            log.Debug("v2()");
             return Ok(new {});
         }
 
@@ -31,6 +32,7 @@ namespace MatrixIdent.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult v1()
         {
+            log.Debug("v1()");
             return Ok(new {});
         }
 
@@ -38,7 +40,9 @@ namespace MatrixIdent.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult versions()
         {
-            return Ok(new { versions = new[] { _config.getSpecVersion(), _config.getApiVersion() } });
+            object result = new { versions = new[] { _config.getSpecVersion(), _config.getApiVersion() } };
+            log.Debug("versions(): "+result.ToString());
+            return Ok(result);
         }
 
         [HttpGet("/_matrix/identity/test")]
