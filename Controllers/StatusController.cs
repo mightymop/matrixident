@@ -11,7 +11,9 @@ namespace MatrixIdent.Controllers
     public class StatusController : ControllerBase
     {
         private readonly ConfigService _config;
+
         private ILog log = LogManager.GetLogger(typeof(StatusController));
+
 
         public StatusController(ConfigService config)
         {

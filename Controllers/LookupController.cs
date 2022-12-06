@@ -6,7 +6,9 @@ using System.DirectoryServices.Protocols;
 using System.Text.Json.Nodes;
 using System.Collections;
 using System.Net;
+
 using log4net;
+
 
 namespace MatrixIdent.Controllers
 {
@@ -17,7 +19,9 @@ namespace MatrixIdent.Controllers
         private readonly DBService _dbService;
         private readonly LDAPService _ldapService;
         private readonly ConfigService _configService;
+
         private ILog log = LogManager.GetLogger(typeof(LookupController));
+
 
         public LookupController(DBService dbService, LDAPService ldapService, ConfigService configService)
         {

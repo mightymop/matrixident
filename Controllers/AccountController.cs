@@ -3,7 +3,9 @@ using MatrixIdent.Models;
 using MatrixIdent.Services;
 using System.Net;
 using System.Text.Json.Nodes;
+
 using log4net;
+
 
 namespace MatrixIdent.Controllers
 {
@@ -13,7 +15,9 @@ namespace MatrixIdent.Controllers
     {
         private readonly DBService _dbService;
         private readonly ConfigService __configService;
+
         private ILog log = LogManager.GetLogger(typeof(AccountController));
+
 
         public AccountController(DBService dbService, ConfigService configService)
         {

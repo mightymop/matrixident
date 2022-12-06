@@ -10,6 +10,7 @@ namespace MatrixIdent.Database
     {
 
         private readonly ConfigService _config;
+
         private ILog log = LogManager.GetLogger(typeof(IdentDbContext));
 
         public IdentDbContext(ConfigService config) : base()

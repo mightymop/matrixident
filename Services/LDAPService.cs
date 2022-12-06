@@ -5,12 +5,14 @@ using System.DirectoryServices.Protocols;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 
+
 namespace MatrixIdent.Services
 {
     public class LDAPService
     {
 
         private ConfigService _configService;
+
         private ILog log = LogManager.GetLogger(typeof(LDAPService));
 
         public LDAPService(ConfigService config)
@@ -48,6 +50,7 @@ namespace MatrixIdent.Services
         private string prepareFilter1(string search, string medium)
         {
             string searchfilter = getFilterPartFromMedium(medium).Replace("%search%", search);
+
             string result = "(&" + _configService.getLDAPFilter() + searchfilter + ")";
             log.Debug("prepareFilter1(): " + result);
             return result;
@@ -121,6 +124,7 @@ namespace MatrixIdent.Services
             }
             catch (LdapException e)
             {
+
                 log.Error("connect(): " + e.Message);
                 return connectHelper(user, pass, _configService.getLDAPDomain());
             }

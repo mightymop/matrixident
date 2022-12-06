@@ -1,9 +1,7 @@
 ﻿using MatrixIdent.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Dynamic;
 using MatrixIdent.Models;
-using log4net;
+
 
 namespace MatrixIdent.Controllers
 {
@@ -12,6 +10,7 @@ namespace MatrixIdent.Controllers
     public class PoliciesController : ControllerBase
     {
         private ConfigService _config;
+
         private ILog log = LogManager.GetLogger(typeof(PoliciesController));
 
         public PoliciesController(ConfigService config)
