@@ -140,7 +140,7 @@ namespace MatrixIdent.Services
 
             var res = Functions.getTargetFromSrvRecord(_matrix_domain,"_matrix");
 
-            if (res != ":0")
+            if (res != ":0" && res!=":")
             {
                 _matrix_host_homeserver = res.Split(":")[0];
                 _matrix_port_homeserver = Convert.ToInt32(res.Split(":")[1]);
