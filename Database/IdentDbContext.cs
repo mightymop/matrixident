@@ -15,7 +15,7 @@ namespace MatrixIdent.Database
 
         public IdentDbContext(ConfigService config) : base()
         {
-            _config=config;
+            _config=config;       
             AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
         }
 
@@ -23,7 +23,8 @@ namespace MatrixIdent.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(_config.getConfigurationManager().GetConnectionString("SqlServer"));
+                string constr = _config.getConfigurationManager().GetConnectionString("SqlServer");
+                optionsBuilder.UseSqlServer(constr);
             }
         }
 

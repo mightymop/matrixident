@@ -3,6 +3,7 @@ using MatrixIdent.Services;
 using System.Net;
 using System.Text.Json.Nodes;
 using log4net;
+using MatrixIdent.Database;
 
 namespace MatrixIdent.Controllers
 {
@@ -33,7 +34,7 @@ namespace MatrixIdent.Controllers
         public IActionResult v1()
         {
             log.Debug("v1()");
-            return Ok(new {});
+            return Ok(new { });
         }
 
         [HttpGet("/_matrix/identity/versions")]

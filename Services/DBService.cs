@@ -1,17 +1,29 @@
 ﻿using MatrixIdent.Models;
 using MatrixIdent.Database;
 using Microsoft.EntityFrameworkCore;
+using log4net;
+using MatrixIdent.Controllers;
 
 namespace MatrixIdent.Services
 {
     public class DBService
     {
         private IdentDbContext _context;
+        private ILog log = LogManager.GetLogger(typeof(DBService));
 
-        
         public DBService(ConfigService config)
-        {     
-            _context = new IdentDbContext(config);
+        {
+            try
+            {
+                _context = new IdentDbContext(config);
+                _context.Database.Migrate();
+                _context.Database.EnsureCreated();
+            }
+            catch (Exception e)
+            {
+                log.Error(e);
+            }
+            
         }
 
         public async Task<string> saveToken(AuthItem itm)
