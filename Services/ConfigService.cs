@@ -22,6 +22,8 @@ namespace MatrixIdent.Services
         private string _ldap_usernameField;
         private List<string> _ldap_search_attributes;
         private int _ldap_min_search_length;
+        private string _ldap_addDomainToUserID;
+        private string _ldap_DomainToAddToUserID;
 
         private string _matrix_domain;
 
@@ -79,6 +81,9 @@ namespace MatrixIdent.Services
             _ldap_searchbase = _cmgr.GetSection("ldap").GetSection("searchbase").Value;
             _ldap_usernameField = _cmgr.GetSection("ldap").GetSection("usernamefield").Value;
             _ldap_min_search_length = System.Convert.ToInt32(_cmgr.GetSection("ldap").GetSection("min_search_length").Value);
+
+            _ldap_addDomainToUserID = _cmgr.GetSection("ldap").GetSection("lookupDomain").GetSection("addDomainToUserID").Value;
+            _ldap_DomainToAddToUserID = _cmgr.GetSection("ldap").GetSection("lookupDomain").GetSection("domainToAdd").Value;
 
             _matrix_domain = _cmgr.GetSection("matrix").GetSection("domain").Value;
 
@@ -154,6 +159,27 @@ namespace MatrixIdent.Services
             _searchType = _cmgr.GetSection("search").Value.ToLower()=="ldap"?SEARCHTYPE.LDAP:SEARCHTYPE.LOCALDB;
 
             Functions.addDefaultServerKeys("./appsettings.json");
+        }
+
+        public string get(string val)
+        {
+            string[] parts = val.Split(":");
+            IConfigurationSection s = _cmgr.GetSection(parts[0]);
+            for (int n = 1; n < parts.Length; n++)
+            {
+                s = s.GetSection(parts[n]);
+            }
+            return s.Value;
+        }
+
+        public bool isAddDomainToUserID()
+        {
+            return _ldap_addDomainToUserID.ToLower() == "true" || _ldap_addDomainToUserID == "1" ? true : false;
+        }
+        
+        public string getDomainToAddToUserID()
+        {
+            return _ldap_DomainToAddToUserID;
         }
 
         public int getMinSearchLength()

@@ -89,13 +89,12 @@ namespace MatrixIdent.Services
                     //        log.Debug((string)entry.Attributes[attributeName][0]);
                     if (name.Equals(usernamefield))
                     {
-                        result.id = (string)(entry.Attributes[attributeName][0]);
+                        result.id = "@"+(string)(entry.Attributes[attributeName][0]) + (_configService.isAddDomainToUserID()?":"+_configService.getDomainToAddToUserID():"");
                     }
                     if (name.Equals("displayname"))
                     {
                         result.displayName = (string)(entry.Attributes[attributeName][0]);
                     }
-
                 }
 
                 res.Add(result);
