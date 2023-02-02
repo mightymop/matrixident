@@ -10,7 +10,7 @@ using log4net;
 
 namespace MatrixIdent.Controllers
 {
-    [Route("/_matrix/identity/v2/validate")]
+
     [ApiController]
     public class ValidateController : ControllerBase
     {
@@ -128,7 +128,7 @@ namespace MatrixIdent.Controllers
             return Ok("Email address is validated.");
         }
 
-        [HttpPost("/_matrix/identity/v2/validate/email/submitToken")]
+        [HttpPost("/_matrix/identity/v2/validate/email/submitToken_")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

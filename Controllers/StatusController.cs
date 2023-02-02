@@ -7,7 +7,7 @@ using MatrixIdent.Database;
 
 namespace MatrixIdent.Controllers
 {
-    [Route("/_matrix/identity/v2")]
+   
     [ApiController]
     public class StatusController : ControllerBase
     {

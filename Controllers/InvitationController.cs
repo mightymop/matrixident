@@ -10,7 +10,7 @@ using log4net;
 
 namespace MatrixIdent.Controllers
 {
-    [Route("/_matrix/identity/v2")]
+  
     [ApiController]
     public class InvitationController : ControllerBase
     {

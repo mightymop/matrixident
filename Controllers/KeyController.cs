@@ -10,7 +10,6 @@ using log4net;
 
 namespace MatrixIdent.Controllers
 {
-    [Route("_matrix/identity/v2/pubkey")]
     [ApiController]
     public class KeyController : ControllerBase
     {

@@ -5,7 +5,7 @@ using log4net;
 
 namespace MatrixIdent.Controllers
 {
-    [Route("_matrix/identity/v2/terms")]
+   //[Route("_matrix/identity/v2/terms")]
     [ApiController]
     public class PoliciesController : ControllerBase
     {
@@ -80,7 +80,7 @@ namespace MatrixIdent.Controllers
             return new { policies = new { privacy_policy = buildPrivacyPolicyObject(), terms_of_service = buildTermsOfServiceObject() } };
         }
 
-        [HttpGet]
+        [HttpGet ("_matrix/identity/v2/terms")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Get()
         {
@@ -88,7 +88,7 @@ namespace MatrixIdent.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost ("_matrix/identity/v2/terms")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Post()
         {

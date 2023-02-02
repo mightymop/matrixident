@@ -62,8 +62,8 @@ namespace MatrixIdent.Services
 
             _pvPolicyVersion = _cmgr.GetSection("policies").GetSection("privacy_policy").GetSection("version").Value;
             _termsOfServiceVersion = _cmgr.GetSection("policies").GetSection("terms_of_service").GetSection("version").Value;
-            _apiVersion = _cmgr.GetSection("version").GetSection("api").Value;
-            _specVersion = _cmgr.GetSection("version").GetSection("spec").Value;
+            _apiVersion = _cmgr.GetSection("api").GetSection("version").Value;
+            _specVersion = _cmgr.GetSection("api").GetSection("spec").Value;
 
             _pvPolicies = new List<PolicyItem>();
             _ldap_search_attributes = new List<string>();

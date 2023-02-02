@@ -12,7 +12,30 @@ using log4net;
 
 namespace MatrixIdent.Controllers
 {
-    [Route("/_matrix/identity/v2")]
+    public class ResultComparator : IComparer
+    {
+        private string _search;
+
+        public ResultComparator(string search)
+        {
+            this._search = search;
+        }
+
+        // Calls CaseInsensitiveComparer.Compare with the parameters reversed.
+        int IComparer.Compare(Object x, Object y)
+        {
+            int scroreX = Functions.ComputeLevenshteinDistance(_search, ((LdapResult)x).displayName);
+            int scroreY = Functions.ComputeLevenshteinDistance(_search, ((LdapResult)y).displayName);
+            if (scroreX < scroreY)
+                return -1;
+            if (scroreX > scroreY)
+                return 1;
+
+            return ((LdapResult)x).displayName.CompareTo(((LdapResult)y).displayName);
+        }
+    }
+
+
     [ApiController]
     public class LookupController : ControllerBase
     {
@@ -103,30 +126,6 @@ namespace MatrixIdent.Controllers
                 {
                     return BadRequest(new ErrorType("M_NOT_IMPLEMENTED","The algoritm is not supported by the server").ToJSON());
                 }
-            }
-          
-        }
-
-        public class ResultComparator: IComparer
-        {
-            private string _search;
-
-            public ResultComparator(string search)
-            {
-                this._search = search;
-            }
-                
-            // Calls CaseInsensitiveComparer.Compare with the parameters reversed.
-            int IComparer.Compare(Object x, Object y)
-            {
-                int scroreX = Functions.ComputeLevenshteinDistance(_search, ((LdapResult)x).displayName);
-                int scroreY = Functions.ComputeLevenshteinDistance(_search, ((LdapResult)y).displayName);
-                if (scroreX < scroreY)
-                    return -1;
-                if (scroreX > scroreY)
-                    return 1;
-
-                return ((LdapResult)x).displayName.CompareTo(((LdapResult)y).displayName);
             }
         }
 
